@@ -1,9 +1,9 @@
 <?php
 
-namespace AppBundle;
+namespace Lewik\BoBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class AppBundle extends Bundle
+class LewikBoBundle extends Bundle
 {
 }
