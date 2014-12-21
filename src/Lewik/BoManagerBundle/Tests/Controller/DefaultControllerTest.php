@@ -1,6 +1,6 @@
 <?php
 
-namespace Lewik\BoBundle\Tests\Controller;
+namespace Lewik\BoManagerBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

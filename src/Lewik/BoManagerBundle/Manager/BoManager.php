@@ -1,6 +1,6 @@
 <?php
 
-namespace LewikBoManagerBundle\Manager;
+namespace Lewik\BoManagerBundle\Manager;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadataInfo;

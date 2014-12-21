@@ -6,10 +6,10 @@
 
 
     <services>
-        <service class="LewikBoManagerBundle\Manager\BoManager" id="lewikbomanagerbundle.manager.bomanager">
-            <argument type="service" id="kernel"/>
-            <argument type="service" id="doctrine"/>
-            <argument type="service" id="filesystem"/>
+        <service class="Lewik\BoManagerBundle\Manager\BoManager" id="lewik_bomanagerbundle.manager.bomanager">
+            <argument id="kernel" type="service"/>
+            <argument id="doctrine" type="service"/>
+            <argument id="filesystem" type="service"/>
         </service>
 
     </services>
