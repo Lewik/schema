@@ -61,22 +61,16 @@ class BoManager
     }
 
     /**
-     *
+     * @param $entityName
+     * @param $fields
+     * @throws \Doctrine\ORM\Mapping\MappingException
+     * @throws \Doctrine\ORM\Tools\Export\ExportException
      */
-    public function makeTestEntity()
+    public function generateEntity($entityName, $fields)
     {
         $format = 'xml';
 
         //region Хардкодим на время
-        $entity = 'Test' . time();
-        $fields = [
-            [
-                'columnName' => 'asdsdsadsadsa',
-                'fieldName' => 'asdsdsadsadsa',
-                'type' => 'string',
-                'length' => 255,
-            ],
-        ];
         $withRepository = true;
         //endregion
 
@@ -91,8 +85,8 @@ class BoManager
             $config->getEntityNamespaces()
         ));
 
-        $entityClass = $this->doctrine->getAliasNamespace($bundle->getName()) . '\\' . $entity;
-        $entityPath = $bundle->getPath() . '/Entity/' . str_replace('\\', '/', $entity) . '.php';
+        $entityClass = $this->doctrine->getAliasNamespace($bundle->getName()) . '\\' . $entityName;
+        $entityPath = $bundle->getPath() . '/Entity/' . str_replace('\\', '/', $entityName) . '.php';
         if (file_exists($entityPath)) {
             throw new \RuntimeException(sprintf('Entity "%s" already exists.', $entityClass));
         }
@@ -112,7 +106,7 @@ class BoManager
 
         $cme = new ClassMetadataExporter();
         $exporter = $cme->getExporter($format);
-        $mappingPath = $bundle->getPath() . '/Resources/config/doctrine/' . str_replace('\\', '.', $entity) . '.orm.' . $format;
+        $mappingPath = $bundle->getPath() . '/Resources/config/doctrine/' . str_replace('\\', '.', $entityName) . '.orm.' . $format;
 
         if (file_exists($mappingPath)) {
             throw new \RuntimeException(sprintf('Cannot generate entity when mapping "%s" already exists.', $mappingPath));

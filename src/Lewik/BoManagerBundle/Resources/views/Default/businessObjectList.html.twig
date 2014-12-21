@@ -1,0 +1,11 @@
+<table>
+    {% for file in files %}
+        <tr>
+            <td>{{ file.getFilename }}</td>
+        </tr>
+    {% else %}
+        <tr>
+            <td>Бизнес-объектов нет</td>
+        </tr>
+    {% endfor %}
+</table>

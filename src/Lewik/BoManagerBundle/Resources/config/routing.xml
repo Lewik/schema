@@ -7,4 +7,7 @@
     <route id="lewik_bo_manager_business_objects" path="/business_objects">
         <default key="_controller">LewikBoManagerBundle:Default:businessObjects</default>
     </route>
+    <route id="lewik_bo_manager_generate_bo" path="/generate_bo">
+        <default key="_controller">LewikBoManagerBundle:Default:generateObject</default>
+    </route>
 </routes>
