@@ -1,16 +1,36 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>BoConfiguration edit</h1>
-
+    <h3>BoConfiguration edit</h3>
+    {% form_theme edit_form 'form_table_layout.html.twig' %}
     {{ form(edit_form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('boconfiguration') }}">
-            Back to the list
-        </a>
-    </li>
-    <li>{{ form(delete_form) }}</li>
-</ul>
+    <table border="1">
+        <tr>
+            <th>Id</th>
+            <th>Label</th>
+            <th>System name</th>
+            <th>type</th>
+            <th>length</th>
+            <th>actions</th>
+        </tr>
+
+        {% for field in entity.fields %}
+            <tr>
+                <td>{{ field.id }}</td>
+                <td>{{ field.label }}</td>
+                <td>{{ field.systemName }}</td>
+                <td>{{ field.type }}</td>
+                <td>{{ field.length }}</td>
+                <td>
+                    {#<a href="{{ path('bofieldconfiguration_edit', { 'id': entity.id }) }}">edit</a>#}
+                    {#<br/>#}
+                    <a href="{{ path('bofieldconfiguration_delete', { 'boFieldConfiguration': field.id }) }}">delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    <a href="{{ path('bofieldconfiguration_new', { 'boConfiguration': entity.id }) }}">add field</a><br/>
+    <a href="{{ path('boconfiguration') }}"> Back to the list </a><br/>
+    {{ form(delete_form) }}
 {% endblock %}

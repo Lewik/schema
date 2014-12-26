@@ -11,4 +11,5 @@
         <default key="_controller">LewikBoManagerBundle:Default:generateObject</default>
     </route>
     <import resource="@LewikBoManagerBundle/Resources/config/routing/boconfiguration.xml" prefix="/boconfiguration"/>
+    <import resource="@LewikBoManagerBundle/Resources/config/routing/bofieldconfiguration.xml" prefix="/bofieldconfiguration"/>
 </routes>

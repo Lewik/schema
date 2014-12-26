@@ -1,43 +1,44 @@
 {% extends '::base.html.twig' %}
 
 {% block body -%}
-    <h1>BoConfiguration list</h1>
+    <h3>BoConfiguration list</h3>
 
-    <table class="records_list">
+    <table class="records_list" border="1">
         <thead>
-            <tr>
-                <th>Label</th>
-                <th>Systemname</th>
-                <th>Id</th>
-                <th>Actions</th>
-            </tr>
+        <tr>
+
+            <th>Id</th>
+            <th>Label</th>
+            <th>System name</th>
+            <th>Actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for entity in entities %}
             <tr>
+                <td>{{ entity.id }}</td>
                 <td><a href="{{ path('boconfiguration_show', { 'id': entity.id }) }}">{{ entity.label }}</a></td>
                 <td>{{ entity.systemName }}</td>
-                <td>{{ entity.id }}</td>
                 <td>
-                <ul>
-                    <li>
-                        <a href="{{ path('boconfiguration_show', { 'id': entity.id }) }}">show</a>
-                    </li>
-                    <li>
-                        <a href="{{ path('boconfiguration_edit', { 'id': entity.id }) }}">edit</a>
-                    </li>
-                </ul>
+                    <ul>
+                        <li>
+                            <a href="{{ path('boconfiguration_show', { 'id': entity.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('boconfiguration_edit', { 'id': entity.id }) }}">edit</a>
+                        </li>
+                    </ul>
                 </td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-        <ul>
+    <ul>
         <li>
             <a href="{{ path('boconfiguration_new') }}">
                 Create a new entry
             </a>
         </li>
     </ul>
-    {% endblock %}
+{% endblock %}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns="http://symfony.com/schema/routing"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="bofieldconfiguration" path="/">
+        <default key="_controller">LewikBoManagerBundle:BoFieldConfiguration:index</default>
+    </route>
+
+    <route id="bofieldconfiguration_show" path="/{id}/show">
+        <default key="_controller">LewikBoManagerBundle:BoFieldConfiguration:show</default>
+    </route>
+
+    <route id="bofieldconfiguration_new" path="/{boConfiguration}/new">
+        <default key="_controller">LewikBoManagerBundle:BoFieldConfiguration:new</default>
+    </route>
+
+    <route id="bofieldconfiguration_create" path="/{boConfiguration}/create">
+        <default key="_controller">LewikBoManagerBundle:BoFieldConfiguration:create</default>
+        <requirement key="_method">post</requirement>
+    </route>
+
+    <route id="bofieldconfiguration_edit" path="/{id}/edit">
+        <default key="_controller">LewikBoManagerBundle:BoFieldConfiguration:edit</default>
+    </route>
+
+    <route id="bofieldconfiguration_update" path="/{id}/update">
+        <default key="_controller">LewikBoManagerBundle:BoFieldConfiguration:update</default>
+        <requirement key="_method">post|put</requirement>
+    </route>
+
+    <route id="bofieldconfiguration_delete" path="/{boFieldConfiguration}/delete">
+        <default key="_controller">LewikBoManagerBundle:BoFieldConfiguration:delete</default>
+    </route>
+
+</routes>
