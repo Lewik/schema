@@ -1,7 +1,3 @@
-lewik_ui:
-    resource: "@LewikUiBundle/Resources/config/routing.xml"
-    prefix:   /
-
 lewik_bo_manager:
     resource: "@LewikBoManagerBundle/Resources/config/routing.xml"
     prefix:   /
