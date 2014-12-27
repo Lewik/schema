@@ -10,7 +10,10 @@
         <field name="label" type="string" column="label" length="512"/>
         <field name="systemName" type="string" column="systemName" length="30"/>
         <field name="type" type="string" column="type" length="16"/>
-        <field name="length" type="smallint" column="length"/>
+        <field name="length" type="smallint" column="length" nullable="true"/>
+        <field name="targetEntity" type="string" column="targetEntity" length="30" nullable="true"/>
+        <field name="inversedBy" type="string" column="inversedBy" length="16" nullable="true"/>
+        <field name="mappedBy" type="string" column="mappedBy" length="16" nullable="true"/>
         <many-to-one field="bo" target-entity="Lewik\BoManagerBundle\Entity\BoConfiguration" inversed-by="fields"/>
     </entity>
 </doctrine-mapping>

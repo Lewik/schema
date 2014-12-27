@@ -6,5 +6,10 @@
     </id>
     <field name="positons" type="string" column="positons" length="1024"/>
     <field name="name" type="string" column="name" length="512"/>
+    <many-to-one field="procedure" target-entity="Lewik\BoBundle\Entity\Procedure" inversed-by="lots">
+      <join-columns>
+        <join-column name="procedure_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
   </entity>
 </doctrine-mapping>

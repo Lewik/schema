@@ -5,11 +5,18 @@
 
     {{ form(form) }}
 
-        <ul class="record_actions">
-    <li>
-        <a href="{{ path('boconfiguration') }}">
-            Back to the list
-        </a>
-    </li>
-</ul>
+    <ul class="record_actions">
+        <li>
+            <a href="{{ path('boconfiguration') }}">
+                Back to the list
+            </a>
+        </li>
+    </ul>
+    <fieldset>
+        <legend>Подсказки</legend>
+        one-to-many должно иметь targetEntity<br/>
+        Если one-to-many двунаправленное, то<br/>
+        one-to-many должно иметь mappedBy<br/>
+        many-to-one должно иметь inversedBy<br/>
+    </fieldset>
 {% endblock %}

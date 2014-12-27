@@ -6,6 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
+/** Class BoFieldConfigurationType */
 class BoFieldConfigurationType extends AbstractType
 {
     /**
@@ -16,7 +17,7 @@ class BoFieldConfigurationType extends AbstractType
     {
         $builder
             ->add('label')
-            ->add('systemName')
+            ->add('system_name')
             ->add('type', 'choice', ['choices' => [
                 'smallint' => 'smallint',
                 'integer' => 'integer',
@@ -30,8 +31,15 @@ class BoFieldConfigurationType extends AbstractType
                 'datetime' => 'datetime',
                 'datetimetz' => 'datetimetz',
                 'time' => 'time',
+                'many-to-many' => 'many-to-many',
+                'one-to-many' => 'one-to-many',
+                'many-to-one' => 'many-to-one',
             ]])
-            ->add('length');
+            ->add('length')
+            ->add('target_entity')
+            ->add('mapped_by')
+            ->add('inversed_by')
+        ;
     }
 
     /**
@@ -39,9 +47,9 @@ class BoFieldConfigurationType extends AbstractType
      */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-        $resolver->setDefaults(array(
+        $resolver->setDefaults([
             'data_class' => 'Lewik\BoManagerBundle\Entity\BoFieldConfiguration'
-        ));
+        ]);
     }
 
     /**

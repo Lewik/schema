@@ -80,7 +80,8 @@ class BoManager
             $config->getEntityNamespaces()
         ));
 
-        $entityClass = $this->doctrine->getAliasNamespace($bundle->getName()) . '\\' . $boConfiguration->getSystemName();
+        $entityNamespaceFolder = $this->doctrine->getAliasNamespace($bundle->getName()) . '\\';
+        $entityClass = $entityNamespaceFolder . $boConfiguration->getSystemName();
         $entityPath = $bundle->getPath() . '/Entity/' . str_replace('\\', '/', $boConfiguration->getSystemName()) . '.php';
         if (file_exists($entityPath)) {
             $this->filesystem->remove($entityPath);
@@ -94,16 +95,32 @@ class BoManager
 
         $class->mapField(['fieldName' => 'id', 'type' => 'integer', 'id' => true]);
         $class->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_AUTO);
+
         foreach ($boConfiguration->getFields() as $field) {
-            $class->mapField([
+            $mappingData = [
                 'columnName' => $this->makeColumnName($field->getSystemName()),
                 'fieldName' => $field->getSystemName(),
                 'type' => $field->getType(),
                 'length' => $field->getLength(),
-            ]);
-        }
+                'targetEntity' => $field->getTargetEntity() ? $entityNamespaceFolder . $field->getTargetEntity() : null,
+                'mappedBy' => $field->getMappedBy(),
+                'inversedBy' => $field->getInversedBy(),
+            ];
+            switch ($field->getType()) {
+                case 'many-to-one':
+                    $class->mapManyToOne($mappingData);
+                    break;
+                case 'one-to-many':
+                    $class->mapOneToMany($mappingData);
+                    break;
+                case 'many-to-many':
+                    $class->mapManyToMany($mappingData);
+                    break;
+                default :
+                    $class->mapField($mappingData);
+            }
 
-        $entityGenerator = $this->getEntityGenerator();
+        }
 
         $cme = new ClassMetadataExporter();
         $exporter = $cme->getExporter($format);
@@ -115,10 +132,10 @@ class BoManager
 
         //region генерация кода и конфига
         $mappingCode = $exporter->exportClassMetadata($class);
+        $entityGenerator = $this->getEntityGenerator();
         $entityGenerator->setGenerateAnnotations(false);
         $entityCode = $entityGenerator->generateEntityClass($class);
         //endregion
-
 
 
         //region Запись класса

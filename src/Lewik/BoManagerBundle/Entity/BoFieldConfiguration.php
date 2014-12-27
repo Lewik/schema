@@ -164,4 +164,88 @@ class BoFieldConfiguration
     {
         return $this->bo;
     }
+    /**
+     * @var string
+     */
+    private $targetEntity;
+
+    /**
+     * @var string
+     */
+    private $inversedBy;
+
+    /**
+     * @var string
+     */
+    private $mappedBy;
+
+
+    /**
+     * Set targetEntity
+     *
+     * @param string $targetEntity
+     * @return BoFieldConfiguration
+     */
+    public function setTargetEntity($targetEntity)
+    {
+        $this->targetEntity = $targetEntity;
+
+        return $this;
+    }
+
+    /**
+     * Get targetEntity
+     *
+     * @return string 
+     */
+    public function getTargetEntity()
+    {
+        return $this->targetEntity;
+    }
+
+    /**
+     * Set inversedBy
+     *
+     * @param string $inversedBy
+     * @return BoFieldConfiguration
+     */
+    public function setInversedBy($inversedBy)
+    {
+        $this->inversedBy = $inversedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get inversedBy
+     *
+     * @return string 
+     */
+    public function getInversedBy()
+    {
+        return $this->inversedBy;
+    }
+
+    /**
+     * Set mappedBy
+     *
+     * @param string $mappedBy
+     * @return BoFieldConfiguration
+     */
+    public function setMappedBy($mappedBy)
+    {
+        $this->mappedBy = $mappedBy;
+
+        return $this;
+    }
+
+    /**
+     * Get mappedBy
+     *
+     * @return string 
+     */
+    public function getMappedBy()
+    {
+        return $this->mappedBy;
+    }
 }

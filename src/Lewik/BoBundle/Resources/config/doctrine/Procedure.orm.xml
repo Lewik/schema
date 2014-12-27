@@ -6,5 +6,6 @@
     </id>
     <field name="customer" type="string" column="customer" length="512"/>
     <field name="name" type="string" column="name" length="255"/>
+    <one-to-many field="lots" target-entity="Lewik\BoBundle\Entity\Lot" mapped-by="procedure"/>
   </entity>
 </doctrine-mapping>

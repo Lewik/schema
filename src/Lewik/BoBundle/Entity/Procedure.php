@@ -24,6 +24,18 @@ class Procedure
      */
     private $name;
 
+    /**
+     * @var \Doctrine\Common\Collections\Collection
+     */
+    private $lots;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->lots = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -79,5 +91,38 @@ class Procedure
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add lots
+     *
+     * @param \Lewik\BoBundle\Entity\Lot $lots
+     * @return Procedure
+     */
+    public function addLot(\Lewik\BoBundle\Entity\Lot $lots)
+    {
+        $this->lots[] = $lots;
+
+        return $this;
+    }
+
+    /**
+     * Remove lots
+     *
+     * @param \Lewik\BoBundle\Entity\Lot $lots
+     */
+    public function removeLot(\Lewik\BoBundle\Entity\Lot $lots)
+    {
+        $this->lots->removeElement($lots);
+    }
+
+    /**
+     * Get lots
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getLots()
+    {
+        return $this->lots;
     }
 }

@@ -24,6 +24,11 @@ class Lot
      */
     private $name;
 
+    /**
+     * @var \Lewik\BoBundle\Entity\Procedure
+     */
+    private $procedure;
+
 
     /**
      * Get id
@@ -79,5 +84,28 @@ class Lot
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set procedure
+     *
+     * @param \Lewik\BoBundle\Entity\Procedure $procedure
+     * @return Lot
+     */
+    public function setProcedure(\Lewik\BoBundle\Entity\Procedure $procedure = null)
+    {
+        $this->procedure = $procedure;
+
+        return $this;
+    }
+
+    /**
+     * Get procedure
+     *
+     * @return \Lewik\BoBundle\Entity\Procedure 
+     */
+    public function getProcedure()
+    {
+        return $this->procedure;
     }
 }
