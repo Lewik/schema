@@ -1,15 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<routes xmlns="http://symfony.com/schema/routing"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
-
-    <route id="lewik_bo_manager_business_objects" path="/business_objects">
-        <default key="_controller">LewikBoManagerBundle:Default:businessObjects</default>
-    </route>
-    <route id="lewik_bo_manager_generate_bo" path="/generate_bo">
-        <default key="_controller">LewikBoManagerBundle:Default:generateObject</default>
-    </route>
-    <import resource="@LewikBoManagerBundle/Resources/config/routing/boconfiguration.xml" prefix="/boconfiguration"/>
-    <import resource="@LewikBoManagerBundle/Resources/config/routing/bofieldconfiguration.xml" prefix="/bofieldconfiguration"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<routes xmlns="http://symfony.com/schema/routing" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+  <route id="lewik_bo_manager_business_objects" path="/business_objects">
+    <default key="_controller">LewikBoManagerBundle:Default:businessObjects</default>
+  </route>
+  <import resource="@LewikBoManagerBundle/Resources/config/routing/boconfiguration.xml" prefix="/boconfiguration"/>
+  <import resource="@LewikBoManagerBundle/Resources/config/routing/bofieldconfiguration.xml" prefix="/bofieldconfiguration"/>
+  <route id="lewik_bo_manager_generate_bo" path="/generate">
+    <default key="_controller">LewikBoManagerBundle:BoGenerate:generate</default>
+  </route>
 </routes>

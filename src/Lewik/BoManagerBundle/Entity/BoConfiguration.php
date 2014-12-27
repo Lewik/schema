@@ -119,7 +119,7 @@ class BoConfiguration
     /**
      * Get fields
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection|BoFieldConfiguration[]
      */
     public function getFields()
     {

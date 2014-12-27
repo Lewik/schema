@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
 use Doctrine\ORM\Tools\EntityGenerator;
 use Doctrine\ORM\Tools\EntityRepositoryGenerator;
 use Doctrine\ORM\Tools\Export\ClassMetadataExporter;
+use Lewik\BoManagerBundle\Entity\BoConfiguration;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Finder\Finder;
@@ -61,19 +62,13 @@ class BoManager
     }
 
     /**
-     * @param $entityName
-     * @param $fields
+     * @param BoConfiguration $boConfiguration
      * @throws \Doctrine\ORM\Mapping\MappingException
      * @throws \Doctrine\ORM\Tools\Export\ExportException
      */
-    public function generateEntity($entityName, $fields)
+    public function generateEntity(BoConfiguration $boConfiguration)
     {
         $format = 'xml';
-
-        //region Хардкодим на время
-        $withRepository = true;
-        //endregion
-
 
         /** @var EntityManagerInterface $entityManager */
         $entityManager = $this->doctrine->getManager();
@@ -85,50 +80,62 @@ class BoManager
             $config->getEntityNamespaces()
         ));
 
-        $entityClass = $this->doctrine->getAliasNamespace($bundle->getName()) . '\\' . $entityName;
-        $entityPath = $bundle->getPath() . '/Entity/' . str_replace('\\', '/', $entityName) . '.php';
+        $entityClass = $this->doctrine->getAliasNamespace($bundle->getName()) . '\\' . $boConfiguration->getSystemName();
+        $entityPath = $bundle->getPath() . '/Entity/' . str_replace('\\', '/', $boConfiguration->getSystemName()) . '.php';
         if (file_exists($entityPath)) {
-            throw new \RuntimeException(sprintf('Entity "%s" already exists.', $entityClass));
+            $this->filesystem->remove($entityPath);
         }
 
+
         $class = new ClassMetadataInfo($entityClass);
-        if ($withRepository) {
-            $class->customRepositoryClassName = $entityClass . 'Repository';
-        }
+
+        $class->customRepositoryClassName = $entityClass . 'Repository';
+
 
         $class->mapField(['fieldName' => 'id', 'type' => 'integer', 'id' => true]);
         $class->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_AUTO);
-        foreach ($fields as $field) {
-            $class->mapField($field);
+        foreach ($boConfiguration->getFields() as $field) {
+            $class->mapField([
+                'columnName' => $this->makeColumnName($field->getSystemName()),
+                'fieldName' => $field->getSystemName(),
+                'type' => $field->getType(),
+                'length' => $field->getLength(),
+            ]);
         }
 
         $entityGenerator = $this->getEntityGenerator();
 
         $cme = new ClassMetadataExporter();
         $exporter = $cme->getExporter($format);
-        $mappingPath = $bundle->getPath() . '/Resources/config/doctrine/' . str_replace('\\', '.', $entityName) . '.orm.' . $format;
+        $mappingPath = $bundle->getPath() . '/Resources/config/doctrine/' . str_replace('\\', '.', $boConfiguration->getSystemName()) . '.orm.' . $format;
 
         if (file_exists($mappingPath)) {
-            throw new \RuntimeException(sprintf('Cannot generate entity when mapping "%s" already exists.', $mappingPath));
+            $this->filesystem->remove($mappingPath);
         }
 
+        //region генерация кода и конфига
         $mappingCode = $exporter->exportClassMetadata($class);
         $entityGenerator->setGenerateAnnotations(false);
         $entityCode = $entityGenerator->generateEntityClass($class);
+        //endregion
 
 
+
+        //region Запись класса
         $this->filesystem->mkdir(dirname($entityPath));
         file_put_contents($entityPath, $entityCode);
+        //endregion
 
-        if ($mappingPath) {
-            $this->filesystem->mkdir(dirname($mappingPath));
-            file_put_contents($mappingPath, $mappingCode);
-        }
+        //region Запись конфига
+        $this->filesystem->mkdir(dirname($mappingPath));
+        file_put_contents($mappingPath, $mappingCode);
+        //endregion
 
-        if ($withRepository) {
-            $path = $bundle->getPath() . str_repeat('/..', substr_count(get_class($bundle), '\\'));
-            $this->getRepositoryGenerator()->writeEntityRepositoryClass($class->customRepositoryClassName, $path);
-        }
+
+        //region Запись репозитория
+        $path = $bundle->getPath() . str_repeat('/..', substr_count(get_class($bundle), '\\'));
+        $this->getRepositoryGenerator()->writeEntityRepositoryClass($class->customRepositoryClassName, $path);
+        //endregion
 
 
     }
@@ -155,5 +162,25 @@ class BoManager
     protected function getRepositoryGenerator()
     {
         return new EntityRepositoryGenerator();
+    }
+
+    /**
+     *
+     */
+    public function generateAll()
+    {
+        $boConfigurations = $this->doctrine->getManager()->getRepository('LewikBoManagerBundle:BoConfiguration')->findAll();
+        foreach ($boConfigurations as $boConfiguration) {
+            $this->generateEntity($boConfiguration);
+        };
+    }
+
+    /**
+     * @param $getSystemName
+     * @return mixed
+     */
+    private function makeColumnName($getSystemName)
+    {
+        return $getSystemName;
     }
 } 

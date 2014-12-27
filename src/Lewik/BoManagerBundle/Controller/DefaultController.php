@@ -13,7 +13,8 @@ class DefaultController extends Controller
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function businessObjectsAction(){
+    public function businessObjectsAction()
+    {
         $this->container->get('file_locator');
         $finder = new Finder();
         $finder->files()->in(
@@ -34,25 +35,5 @@ class DefaultController extends Controller
 
         }
         return $this->render('LewikBoManagerBundle:Default:businessObjectList.html.twig', ['files' => $finder]);
-    }
-
-    /**
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function generateObjectAction()
-    {
-        $entityName = 'Test' . time();
-        $fields = [
-            [
-                'columnName' => 'asdsdsadsadsa',
-                'fieldName' => 'asdsdsadsadsa',
-                'type' => 'string',
-                'length' => 255,
-            ],
-        ];
-        $this->container->get('lewik_bomanagerbundle.manager.bomanager')
-            ->generateEntity($entityName, $fields);
-
-        return $this->render('LewikBoManagerBundle:Default:index.html.twig', ['name' => 'asdsa']);
     }
 }
