@@ -7,10 +7,9 @@
 
         <ul class="record_actions">
     <li>
-        <a href="{{ path('bofieldconfiguration') }}">
+        <a href="{{ path('boconfiguration_edit', { 'id': entity.bo.id }) }}">
             Back to the list
         </a>
     </li>
-    <li>{{ form(delete_form) }}</li>
 </ul>
 {% endblock %}

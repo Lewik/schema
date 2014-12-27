@@ -25,6 +25,7 @@
                 <td>
                     {#<a href="{{ path('bofieldconfiguration_edit', { 'id': entity.id }) }}">edit</a>#}
                     {#<br/>#}
+                    <a href="{{ path('bofieldconfiguration_edit', { 'boFieldConfiguration': field.id }) }}">edit</a>
                     <a href="{{ path('bofieldconfiguration_delete', { 'boFieldConfiguration': field.id }) }}">delete</a>
                 </td>
             </tr>

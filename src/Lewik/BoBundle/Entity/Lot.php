@@ -15,12 +15,12 @@ class Lot
     private $id;
 
     /**
-     * @var varchar
+     * @var string
      */
-    private $posiitons;
+    private $positons;
 
     /**
-     * @var varchar
+     * @var string
      */
     private $name;
 
@@ -36,35 +36,35 @@ class Lot
     }
 
     /**
-     * Set posiitons
+     * Set positons
      *
-     * @param \varchar $posiitons
+     * @param string $positons
      * @return Lot
      */
-    public function setPosiitons(\varchar $posiitons)
+    public function setPositons($positons)
     {
-        $this->posiitons = $posiitons;
+        $this->positons = $positons;
 
         return $this;
     }
 
     /**
-     * Get posiitons
+     * Get positons
      *
-     * @return \varchar 
+     * @return string 
      */
-    public function getPosiitons()
+    public function getPositons()
     {
-        return $this->posiitons;
+        return $this->positons;
     }
 
     /**
      * Set name
      *
-     * @param \varchar $name
+     * @param string $name
      * @return Lot
      */
-    public function setName(\varchar $name)
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -74,7 +74,7 @@ class Lot
     /**
      * Get name
      *
-     * @return \varchar 
+     * @return string 
      */
     public function getName()
     {

@@ -4,7 +4,7 @@
     <id name="id" type="integer" column="id">
       <generator strategy="AUTO"/>
     </id>
-    <field name="posiitons" type="varchar" column="posiitons" length="1024"/>
-    <field name="name" type="varchar" column="name" length="512"/>
+    <field name="positons" type="string" column="positons" length="1024"/>
+    <field name="name" type="string" column="name" length="512"/>
   </entity>
 </doctrine-mapping>

@@ -17,11 +17,23 @@ class BoFieldConfigurationType extends AbstractType
         $builder
             ->add('label')
             ->add('systemName')
-            ->add('type')
-            ->add('length')
-        ;
+            ->add('type', 'choice', ['choices' => [
+                'smallint' => 'smallint',
+                'integer' => 'integer',
+                'bigint' => 'bigint',
+                'decimal' => 'decimal',
+                'float' => 'float',
+                'string' => 'string',
+                'text' => 'text',
+                'boolean' => 'boolean',
+                'date' => 'date',
+                'datetime' => 'datetime',
+                'datetimetz' => 'datetimetz',
+                'time' => 'time',
+            ]])
+            ->add('length');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

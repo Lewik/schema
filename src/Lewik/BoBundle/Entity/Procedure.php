@@ -15,12 +15,12 @@ class Procedure
     private $id;
 
     /**
-     * @var varchar
+     * @var string
      */
     private $customer;
 
     /**
-     * @var varchar
+     * @var string
      */
     private $name;
 
@@ -38,10 +38,10 @@ class Procedure
     /**
      * Set customer
      *
-     * @param \varchar $customer
+     * @param string $customer
      * @return Procedure
      */
-    public function setCustomer(\varchar $customer)
+    public function setCustomer($customer)
     {
         $this->customer = $customer;
 
@@ -51,7 +51,7 @@ class Procedure
     /**
      * Get customer
      *
-     * @return \varchar 
+     * @return string 
      */
     public function getCustomer()
     {
@@ -61,10 +61,10 @@ class Procedure
     /**
      * Set name
      *
-     * @param \varchar $name
+     * @param string $name
      * @return Procedure
      */
-    public function setName(\varchar $name)
+    public function setName($name)
     {
         $this->name = $name;
 
@@ -74,7 +74,7 @@ class Procedure
     /**
      * Get name
      *
-     * @return \varchar 
+     * @return string 
      */
     public function getName()
     {

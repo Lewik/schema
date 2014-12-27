@@ -118,24 +118,24 @@ class BoFieldConfigurationController extends Controller
      * Displays a form to edit an existing BoFieldConfiguration entity.
      *
      */
-    public function editAction($id)
+    public function editAction($boFieldConfiguration)
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('LewikBoManagerBundle:BoFieldConfiguration')->find($id);
+        $entity = $em->getRepository('LewikBoManagerBundle:BoFieldConfiguration')->find($boFieldConfiguration);
 
         if (!$entity) {
             throw $this->createNotFoundException('Unable to find BoFieldConfiguration entity.');
         }
 
         $editForm = $this->createEditForm($entity);
-        $deleteForm = $this->createDeleteForm($id);
+        //$deleteForm = $this->createDeleteForm($boFieldConfiguration);
 
-        return $this->render('LewikBoManagerBundle:BoFieldConfiguration:edit.html.twig', array(
+        return $this->render('LewikBoManagerBundle:BoFieldConfiguration:edit.html.twig', [
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ));
+            //'delete_form' => $deleteForm->createView(),
+        ]);
     }
 
     /**
@@ -170,20 +170,20 @@ class BoFieldConfigurationController extends Controller
             throw $this->createNotFoundException('Unable to find BoFieldConfiguration entity.');
         }
 
-        $deleteForm = $this->createDeleteForm($id);
+        //$deleteForm = $this->createDeleteForm($id);
         $editForm = $this->createEditForm($entity);
         $editForm->handleRequest($request);
 
         if ($editForm->isValid()) {
             $em->flush();
 
-            return $this->redirect($this->generateUrl('bofieldconfiguration_edit', array('id' => $id)));
+            return $this->redirect($this->generateUrl('bofieldconfiguration_edit', array('boFieldConfiguration' => $id)));
         }
 
         return $this->render('LewikBoManagerBundle:BoFieldConfiguration:edit.html.twig', array(
             'entity'      => $entity,
             'edit_form'   => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            //'delete_form' => $deleteForm->createView(),
         ));
     }
     /**

@@ -21,7 +21,7 @@
         <requirement key="_method">post</requirement>
     </route>
 
-    <route id="bofieldconfiguration_edit" path="/{id}/edit">
+    <route id="bofieldconfiguration_edit" path="/{boFieldConfiguration}/edit">
         <default key="_controller">LewikBoManagerBundle:BoFieldConfiguration:edit</default>
     </route>
 
