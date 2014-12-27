@@ -1,1 +1,11 @@
-Hello {{ name }}!
+{% extends "::base.html.twig" %}
+
+{% block title %}Main page{% endblock %}
+
+
+
+{% block body -%}
+    <ul>
+        <li><a href="{{ path('boconfiguration') }}">Bo Configuration</a></li>
+    </ul>
+{% endblock %}

@@ -10,6 +10,11 @@ use Symfony\Component\Finder\SplFileInfo;
 class DefaultController extends Controller
 {
 
+    public function indexAction()
+    {
+        return $this->render('LewikBoManagerBundle:Default:index.html.twig');
+    }
+
     /**
      * @return \Symfony\Component\HttpFoundation\Response
      */
